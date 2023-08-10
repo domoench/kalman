@@ -2,4 +2,10 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: kalman
+root: index
+options:
+  numbered: true
+chapters:
+- file: writeup
+- file: bibliography
+- file: code_appendix
