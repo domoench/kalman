@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Global Temp Anomaly Data &#8212; SDEs Project - Kalman Filters</title>
+    <title>Kalman Filters &#8212; SDEs Project - Kalman Filters</title>
   
   
   
@@ -66,7 +66,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'kalman';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -132,52 +131,26 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="intro.html">
+<a class="navbar-brand logo" href="#">
   
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
+    <p class="title logo__title">SDEs Project - Kalman Filters</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Kalman Filters
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Global Temp Anomaly Data</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</ul>
-
+        
     </div>
 </nav></div>
     </div>
@@ -359,7 +332,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Global Temp Anomaly Data</h1>
+    <h1>Kalman Filters</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -369,7 +342,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Global Temp Anomaly Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Kalman Filters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-concepts">High Level Concepts</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-intuition-underlying-the-kalman-filter">The Bayesian Intuition underlying the Kalman Filter</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-1d-kalman-filter">Implementing the 1D Kalman Filter</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-on-temperature-data">Demonstration on temperature data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-kalman-filter-applied-to-non-linear-data">A linear kalman filter applied to non-linear data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code">CODE</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#global-temp-anomaly-data">Global Temp Anomaly Data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-style-implementation">Bayesian Style Implementation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rewriting-in-standard-notation">Rewriting in Standard notation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-how-the-kalman-filter-behaves-with-data-gaps">Exploring how the kalman filter behaves with data gaps</a></li>
@@ -390,19 +377,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-residuals">Exploring Residuals</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-initial-state-guess-perturbations">Exploring initial state guess perturbations</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-parameter-space-for-the-multivariable-kalman-filter-example">Exploring parameter space for the multivariable kalman filter example</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#writeup">WRITEUP</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kalman-filter-high-level-concepts">Kalman Filter - High Level Concepts</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-intuition-underlying-the-kalman-filter">The Bayesian Intuition underlying the Kalman Filter</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-1d-kalman-filter">Implementing the 1D Kalman Filter</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-on-temperature-data">Demonstration on temperature data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-kalman-filter-applied-to-non-linear-data">A linear kalman filter applied to non-linear data</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliography">Bibliography</a></li>
 </ul>
 
             </nav>
@@ -415,7 +390,82 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="kalman-filters">
+<h1>Kalman Filters<a class="headerlink" href="#kalman-filters" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="high-level-concepts">
+<h1>High Level Concepts<a class="headerlink" href="#high-level-concepts" title="Permalink to this heading">#</a></h1>
+<p>Fundamentally, the Kalman Filter is an algorithm that solves the <em>filtering problem</em>. The filtering problem involves finding the best estimate <span class="math notranslate nohighlight">\(\hat{x}(t)\)</span> of some true process <span class="math notranslate nohighlight">\(\vec{x}(t)\)</span> given noisy measurements <span class="math notranslate nohighlight">\(\vec{z}(t)\)</span>. There are 2 sources of stochastic noise: process noise (noise within <span class="math notranslate nohighlight">\(\vec{x}(t)\)</span> itself) and measurement noise.</p>
+<p>To simplify the discussion, we will makes some assumptions:</p>
+<ul class="simple">
+<li><p>Both forms of noise are gaussian and time-invariant. Both are white noise: the process noise covariance matrix <span class="math notranslate nohighlight">\(Q\)</span> and measurement noise covariance matrix <span class="math notranslate nohighlight">\(R\)</span> are diagonal matrices.</p></li>
+<li><p>The process is linear</p></li>
+</ul>
+<p>Under such assumptions we can represent our process and measurements as follows:</p>
+<p><span class="math notranslate nohighlight">\(
+\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k)
+\\
+\vec{z}(k) = H \vec{x}(k) + \vec{\xi}(k)
+\)</span></p>
+<p>Where <span class="math notranslate nohighlight">\(\vec{\eta}(k) \sim \mathcal{N}(0, Q)\)</span> and <span class="math notranslate nohighlight">\(\vec{\xi}(k) \sim \mathcal{N}(0, R)\)</span></p>
+<p><span id="id1">[<a class="reference internal" href="#id8" title="Peter C Young. Recursive estimation and time-series analysis: An introduction for the student and practitioner. Springer Science &amp; Business Media, 2011.">You11</a>]</span> (4.44).</p>
+<p>The Kalman Filter algorithm can be summarized as follows. At the <span class="math notranslate nohighlight">\(k\)</span>-th iteration:</p>
+<ol class="arabic simple">
+<li><p>Prediction Step</p>
+<ul class="simple">
+<li><p>Make a prediction <span class="math notranslate nohighlight">\(\hat{x}(k | k-1)\)</span> of the value of state <span class="math notranslate nohighlight">\(\vec{x}(k)\)</span> based on the process model and previous state estimate <span class="math notranslate nohighlight">\(\vec{x}(k-1)\)</span></p></li>
+<li><p>Update covariance <span class="math notranslate nohighlight">\(P\)</span>, which quantifies the uncertainty of our estimate, based on the previous value of <span class="math notranslate nohighlight">\(P\)</span> and the process noise covariance <span class="math notranslate nohighlight">\(Q\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Update Step: Incorporating the measurement <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span></p>
+<ul class="simple">
+<li><p>Update the prediction <span class="math notranslate nohighlight">\(\hat{x}(k | k-1)\)</span> with the information <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span>. The estimate <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> will fall along the residual between the prediction and measurement. The uncertainties of the measurement and prediction are used to calculate the Kalman Gain, which scales how far long that residual vector the estimate <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> will fall. For example, if the measurement’s uncertainty (quantified by <span class="math notranslate nohighlight">\(R\)</span>) is much less than the prediction’s uncertainty (quantified by <span class="math notranslate nohighlight">\(P\)</span>), <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> will fall much closer to <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+<p>The exact formulas for the algorithm outlined above can be found in <span id="id2">[<a class="reference internal" href="#id8" title="Peter C Young. Recursive estimation and time-series analysis: An introduction for the student and practitioner. Springer Science &amp; Business Media, 2011.">You11</a>]</span> Chapter 4.4.</p>
+<section id="the-bayesian-intuition-underlying-the-kalman-filter">
+<h2>The Bayesian Intuition underlying the Kalman Filter<a class="headerlink" href="#the-bayesian-intuition-underlying-the-kalman-filter" title="Permalink to this heading">#</a></h2>
+<p>In his excellent exploration of the Kalman Filter <span id="id3">[<a class="reference internal" href="#id9" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span>, Roger Labbe illustrates the bayesian intuition underlying the kalman filter algorithm.</p>
+<p><strong>TODO</strong> explaining the Bayesian connection is a nice to have, save it for after the core presentation of your implementations is done.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="implementing-the-1d-kalman-filter">
+<h1>Implementing the 1D Kalman Filter<a class="headerlink" href="#implementing-the-1d-kalman-filter" title="Permalink to this heading">#</a></h1>
+<p>Here we implement the 1D Kalman filter and apply it to a simple problem involving global temperature data.</p>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<p>As in <span id="id4">[<a class="reference internal" href="#id8" title="Peter C Young. Recursive estimation and time-series analysis: An introduction for the student and practitioner. Springer Science &amp; Business Media, 2011.">You11</a>]</span> (Chapter 4.4, moving body example) we implement the linear Kalman filter to estimate a single state variable over time.</p>
+<p><strong>TODO</strong> Reference 1D kalman filter implementation code</p>
+<p>As Young points out, there is a relationship between the filtering problem and regression. We can transform a regression problem into the filtering problem, then apply Kalman Filter.</p>
+</section>
+<section id="demonstration-on-temperature-data">
+<h2>Demonstration on temperature data<a class="headerlink" href="#demonstration-on-temperature-data" title="Permalink to this heading">#</a></h2>
+<p>To demonstrate this, take the following dataset from NASA <span id="id5">[<a class="reference internal" href="#id10" title="Global land-ocean temperature index. https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt. Accessed: 2023-08-10.">nas</a>]</span>, which depicts the annual global average temperature as compared to a baseline temperature (the average temperature over the period of 1951 to 1980):</p>
+<figure class="align-default" id="global-temp-fig" style="width: 400px">
+<img alt="_images/b075bbeef2f87081467c4cb90ce21b9e32645938fccd50b3cd5abf4551dd50e7.png" src="_images/b075bbeef2f87081467c4cb90ce21b9e32645938fccd50b3cd5abf4551dd50e7.png" />
+</figure>
+<p>There is clearly an upward trend, but the data is noisy - from one year to the next the annual temperature average may go up or down. Furthermore, the upward trend appears nonlinear. How can we determine the trend from the noise?</p>
+<p>We may transform this into filtering problem in a few ways:</p>
+<ol class="arabic simple">
+<li><p>Imagine the temperature is a noisy process and we have perfect measurements.</p></li>
+<li><p>Imagine the temperature is fully deterministic process and we have noisy measurements.</p></li>
+<li><p>Imagine the both the temperature process and our measurements have noise.</p></li>
+</ol>
+<p>Then our kalman filter estimate will be a regression of this temperature data.</p>
+<p><strong>TODO</strong> Which of the above approaches do I demonstrate.</p>
+<p><strong>TODO</strong> Insert figure of the global temperature anomalies</p>
+<p><strong>TODO</strong> Discuss how a linear filter can be applied to this nonlinear problem.</p>
+<section id="a-linear-kalman-filter-applied-to-non-linear-data">
+<h3>A linear kalman filter applied to non-linear data<a class="headerlink" href="#a-linear-kalman-filter-applied-to-non-linear-data" title="Permalink to this heading">#</a></h3>
+<p>Why was our linear-process-model Kalman Filter able to produce a non-linear regression? Even though we defined a constant “zero-velocity” process for our temperature, since we conceptualize the process as stochastic with some non-zero variance, the measurements can pull the trend upwards.</p>
+<p><strong>TODO</strong> Show how tuning the Q and R values can make the filter less able to respond to the measurements.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="code">
+<h1>CODE<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -435,6 +485,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="global-temp-anomaly-data">
 <h1>Global Temp Anomaly Data<a class="headerlink" href="#global-temp-anomaly-data" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
@@ -442,7 +493,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;temp_anomalies.csv&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">no_smoothing</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">#plt.show()</span>
 <span class="n">glue</span><span class="p">(</span><span class="s2">&quot;global_temp_data&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -604,7 +655,6 @@ document.write(`
     <span class="n">gap_zs</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">year</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gap_zs</span><span class="p">))</span>
     <span class="n">xs</span><span class="p">,</span> <span class="n">Ps</span> <span class="o">=</span> <span class="n">kalman_1d</span><span class="p">(</span><span class="n">gap_zs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">x_0</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">gap_zs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$z$ measurements&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat</span><span class="si">{x}</span><span class="s1">$ estimates&#39;</span><span class="p">)</span>
@@ -617,17 +667,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>143
-</pre></div>
-</div>
 <img alt="_images/a155d48796af2c5624484704990a5ef668fbdd92f71d14329431d7b1ba802b94.png" src="_images/a155d48796af2c5624484704990a5ef668fbdd92f71d14329431d7b1ba802b94.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>143
-</pre></div>
-</div>
 <img alt="_images/773652b65f2b0878bf34af79c47875aaa76434eaa874ca2a08ecac119d67a921.png" src="_images/773652b65f2b0878bf34af79c47875aaa76434eaa874ca2a08ecac119d67a921.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>143
-</pre></div>
-</div>
 <img alt="_images/d1456a1e44fde6da92903b07751853cdc669cf01ad1465535e21f04d17b77fe0.png" src="_images/d1456a1e44fde6da92903b07751853cdc669cf01ad1465535e21f04d17b77fe0.png" />
 </div>
 </div>
@@ -638,7 +679,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_R_vals</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">R_min</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">R_min</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">9</span>
 <span class="n">R_max</span> <span class="o">=</span> <span class="mf">4.0</span>
 <span class="k">for</span> <span class="n">Q</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">):</span> <span class="c1"># Process noise variance values</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">num_R_vals</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># TODO set figure sizes</span>
@@ -652,7 +693,7 @@ document.write(`
         <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat</span><span class="si">{x}</span><span class="s1">$ estimates&#39;</span><span class="p">)</span>
         <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">xs</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Ps</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\sigma_{\hat</span><span class="si">{x}</span><span class="s1">}$&#39;</span><span class="p">)</span>
         <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">xs</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Ps</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q:</span><span class="si">{</span><span class="n">Q</span><span class="si">}</span><span class="s1">. R:</span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q:</span><span class="si">{</span><span class="n">Q</span><span class="si">:</span><span class="s1">.02f</span><span class="si">}</span><span class="s1">. R:</span><span class="si">{</span><span class="n">R</span><span class="si">:</span><span class="s1">.02f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
         <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -661,18 +702,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/rm/gt6tvx4x1m58416b1g1qnpcc0000gn/T/ipykernel_20315/2991620769.py:23: RuntimeWarning: invalid value encountered in scalar divide
-  K = P / (P + R)
-</pre></div>
-</div>
-<img alt="_images/8dfb83b65f4bca9aa5e96de44fd0141b633c21371ff2200b91c25c4060d918fb.png" src="_images/8dfb83b65f4bca9aa5e96de44fd0141b633c21371ff2200b91c25c4060d918fb.png" />
-<img alt="_images/7bc5b024822a5103accb177b249411d961ca2ebae3a9c6cc1e6d1d786dcab942.png" src="_images/7bc5b024822a5103accb177b249411d961ca2ebae3a9c6cc1e6d1d786dcab942.png" />
-<img alt="_images/8df950a85ee284ae4459d2a8f1cfd8e6860c05fa0bcb766c49b607bcba2cfc14.png" src="_images/8df950a85ee284ae4459d2a8f1cfd8e6860c05fa0bcb766c49b607bcba2cfc14.png" />
-<img alt="_images/bb64faff19cc696fd8b88a4016c5f8d74b48fea1ab9d7af61b4d2defa6a9b8e6.png" src="_images/bb64faff19cc696fd8b88a4016c5f8d74b48fea1ab9d7af61b4d2defa6a9b8e6.png" />
-<img alt="_images/284428136e36817ee40a66630f9172734e8f25cb9a3c43f4518add22efc01f36.png" src="_images/284428136e36817ee40a66630f9172734e8f25cb9a3c43f4518add22efc01f36.png" />
-<img alt="_images/e446b50cd7a44b1bf8a3ddc776bed51c5039e92d058e2d9ce18f54c205af1860.png" src="_images/e446b50cd7a44b1bf8a3ddc776bed51c5039e92d058e2d9ce18f54c205af1860.png" />
-<img alt="_images/17646e76b6331a99ea62b25f02f0498375c7fc537bb2415f6fc351d4c288c736.png" src="_images/17646e76b6331a99ea62b25f02f0498375c7fc537bb2415f6fc351d4c288c736.png" />
-<img alt="_images/e60f842aecaa2cdba2e02b83af0b7869f09f7560c5a279bd88671051152825b0.png" src="_images/e60f842aecaa2cdba2e02b83af0b7869f09f7560c5a279bd88671051152825b0.png" />
+<img alt="_images/ecd01280441e2ad93408764d58b6828d7a5c800024fb49e9028093b2164ca8b1.png" src="_images/ecd01280441e2ad93408764d58b6828d7a5c800024fb49e9028093b2164ca8b1.png" />
+<img alt="_images/df6b32d5fd378d2fe6dc202ad5940ff808756444f97b3acb5acf772d57b047d2.png" src="_images/df6b32d5fd378d2fe6dc202ad5940ff808756444f97b3acb5acf772d57b047d2.png" />
+<img alt="_images/e8365070583344c8b0bd91c2c24b3c66b3e01425340996a933feca0da3524ff5.png" src="_images/e8365070583344c8b0bd91c2c24b3c66b3e01425340996a933feca0da3524ff5.png" />
+<img alt="_images/1864e0d8f6305b5566abc3834980f3e3f98c41c40ff41142f579808b181b34b7.png" src="_images/1864e0d8f6305b5566abc3834980f3e3f98c41c40ff41142f579808b181b34b7.png" />
+<img alt="_images/e68ea68659a064fafd8f75214e67f429f3186faff31abddbfaec3a2385f9c387.png" src="_images/e68ea68659a064fafd8f75214e67f429f3186faff31abddbfaec3a2385f9c387.png" />
+<img alt="_images/8db16427650a36726eef0dc39f88d2125de9d09066f922c69be63fb6f11ddf33.png" src="_images/8db16427650a36726eef0dc39f88d2125de9d09066f922c69be63fb6f11ddf33.png" />
+<img alt="_images/1dd2f0a08069f8f1466f5388f9fd7335414fb21631001d2ad952728e4d119ffc.png" src="_images/1dd2f0a08069f8f1466f5388f9fd7335414fb21631001d2ad952728e4d119ffc.png" />
+<img alt="_images/d6015a6d6f11f2e8279473605a4b5c2601a443c30fc1448c73420bfa0a431966.png" src="_images/d6015a6d6f11f2e8279473605a4b5c2601a443c30fc1448c73420bfa0a431966.png" />
 </div>
 </div>
 </section>
@@ -1766,74 +1803,24 @@ Q * 0.0.  R * 0.1.
 <li><p>Confirm your covariance ellipse scale factor is correct. <a class="reference external" href="https://www.xarg.org/2018/04/how-to-plot-a-covariance-error-ellipse/">Looks different than some descriptions - not converting to chi-square s scale factor</a>. OR actually it may be the Mahalanobis distance described <a class="reference external" href="https://cookierobotics.com/007/">here</a>. Check if its right or not.</p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="writeup">
-<h1>WRITEUP<a class="headerlink" href="#writeup" title="Permalink to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="kalman-filter-high-level-concepts">
-<h1>Kalman Filter - High Level Concepts<a class="headerlink" href="#kalman-filter-high-level-concepts" title="Permalink to this heading">#</a></h1>
-<p>Fundamentally, the Kalman Filter is an algorithm that solves the <em>filtering problem</em>. The filtering problem involves finding the best estimate <span class="math notranslate nohighlight">\(\hat{x}(t)\)</span> of some true process <span class="math notranslate nohighlight">\(\vec{x}(t)\)</span> given noisy measurements <span class="math notranslate nohighlight">\(\vec{z}(t)\)</span>. There are 2 sources of stochastic noise: process noise (noise within <span class="math notranslate nohighlight">\(\vec{x}(t)\)</span> itself) and measurement noise.</p>
-<p>To simplify the discussion, we will makes some assumptions:</p>
-<ul class="simple">
-<li><p>Both forms of noise are gaussian and time-invariant. Both are white noise: the process noise covariance matrix <span class="math notranslate nohighlight">\(Q\)</span> and measurement noise covariance matrix <span class="math notranslate nohighlight">\(R\)</span> are diagonal matrices.</p></li>
-<li><p>The process is linear</p></li>
-</ul>
-<p>Under such assumptions we can represent our process and measurements as follows:</p>
-<p><span class="math notranslate nohighlight">\(
-\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k)
-\\
-\vec{z}(k) = H \vec{x}(k) + \vec{\xi}(k)
-\)</span></p>
-<p>Where <span class="math notranslate nohighlight">\(\vec{\eta}(k) \sim \mathcal{N}(0, Q)\)</span> and <span class="math notranslate nohighlight">\(\vec{\xi}(k) \sim \mathcal{N}(0, R)\)</span>
-<strong>TODO</strong> cite Young (4.44).</p>
-<p>The Kalman Filter algorithm can be summarized as follows. At the <span class="math notranslate nohighlight">\(k\)</span>-th iteration:</p>
-<ol class="arabic simple">
-<li><p>Prediction Step</p>
-<ul class="simple">
-<li><p>Make a prediction <span class="math notranslate nohighlight">\(\hat{x}(k | k-1)\)</span> of the value of state <span class="math notranslate nohighlight">\(\vec{x}(k)\)</span> based on the process model and previous state estimate <span class="math notranslate nohighlight">\(\vec{x}(k-1)\)</span></p></li>
-<li><p>Update covariance <span class="math notranslate nohighlight">\(P\)</span>, which quantifies the uncertainty of our estimate, based on the previous value of <span class="math notranslate nohighlight">\(P\)</span> and the process noise covariance <span class="math notranslate nohighlight">\(Q\)</span>.</p></li>
-</ul>
-</li>
-<li><p>Update Step: Incorporating the measurement <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span></p>
-<ul class="simple">
-<li><p>Update the prediction <span class="math notranslate nohighlight">\(\hat{x}(k | k-1)\)</span> with the information <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span>. The estimate <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> will fall along the residual between the prediction and measurement. The uncertainties of the measurement and prediction are used to calculate the Kalman Gain, which scales how far long that residual vector the estimate <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> will fall. For example, if the measurement’s uncertainty (quantified by <span class="math notranslate nohighlight">\(R\)</span>) is much less than the prediction’s uncertainty (quantified by <span class="math notranslate nohighlight">\(P\)</span>), <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> will fall much closer to <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span>.</p></li>
-</ul>
-</li>
-</ol>
-<p>The exact formulas for the algorithm outlined above can be found in Young Chapter 4.4 (<strong>TODO</strong> cite).</p>
-<section id="the-bayesian-intuition-underlying-the-kalman-filter">
-<h2>The Bayesian Intuition underlying the Kalman Filter<a class="headerlink" href="#the-bayesian-intuition-underlying-the-kalman-filter" title="Permalink to this heading">#</a></h2>
-<p>In his excellent exploration of the Kalman Filter (<strong>TODO cite</strong>), Roger Labbe illustrates the bayesian intuition underlying the kalman filter algorithm.</p>
-<p><strong>TODO</strong> explaining the Bayesian connection is a nice to have, save it for after the core presentation of your implementations is done.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="implementing-the-1d-kalman-filter">
-<h1>Implementing the 1D Kalman Filter<a class="headerlink" href="#implementing-the-1d-kalman-filter" title="Permalink to this heading">#</a></h1>
-<p>Here we implement the 1D Kalman filter and apply it to a simple problem involving global temperature data.</p>
-<section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
-<p>As in Young (<strong>TODO</strong> Citation. Chapter 4.4, moving body example) we implement the linear Kalman filter to estimate a single state variable over time.</p>
-<p><strong>TODO</strong> Reference 1D kalman filter implementation code</p>
-<p>As Young points out, there is a relationship between the filtering problem and regression. We can transform a regression problem into the filtering problem, then apply Kalman Filter.</p>
-</section>
-<section id="demonstration-on-temperature-data">
-<h2>Demonstration on temperature data<a class="headerlink" href="#demonstration-on-temperature-data" title="Permalink to this heading">#</a></h2>
-<p>To demonstrate this, take the following dataset from NASA (<strong>TODO</strong> cite), which depicts the annual global average temperature as compared to a baseline temperature (the average temperature over the period of 1951 to 1980). There is clearly an upward trend, but the data is noisy - from one year to the next the annual temperature average may go up or down. Furthermore, the upward trend appears nonlinear. How can we determine the trend from the noise?</p>
-<p>We may transform this into filtering problem in a few ways:</p>
-<ol class="arabic simple">
-<li><p>Imagine the temperature is a noisy process and we have perfect measurements.</p></li>
-<li><p>Imagine the temperature is fully deterministic process and we have noisy measurements.</p></li>
-<li><p>Imagine the both the temperature process and our measurements have noise.</p></li>
-</ol>
-<p>Then our kalman filter estimate will be a regression of this temperature data.</p>
-<p><strong>TODO</strong> Which of the above approaches do I demonstrate.</p>
-<p><strong>TODO</strong> Insert figure of the global temperature anomalies</p>
-<p><strong>TODO</strong> Discuss how a linear filter can be applied to this nonlinear problem.</p>
-<section id="a-linear-kalman-filter-applied-to-non-linear-data">
-<h3>A linear kalman filter applied to non-linear data<a class="headerlink" href="#a-linear-kalman-filter-applied-to-non-linear-data" title="Permalink to this heading">#</a></h3>
-<p>Why was our linear-process-model Kalman Filter able to produce a non-linear regression? Even though we defined a constant “zero-velocity” process for our temperature, since we conceptualize the process as stochastic with some non-zero variance, the measurements can pull the trend upwards.</p>
-<p><strong>TODO</strong> Show how tuning the Q and R values can make the filter less able to respond to the measurements.</p>
-</section>
-</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bibliography">
+<h1>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this heading">#</a></h1>
+<div class="docutils container" id="id6">
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">nas</a><span class="fn-bracket">]</span></span>
+<p>Global land-ocean temperature index. <a class="reference external" href="https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt">https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt</a>. Accessed: 2023-08-10.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">Lab</a><span class="fn-bracket">]</span></span>
+<p>Roger Labbe. Kalman and bayesian filters in python. <a class="github reference external" href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python">rlabbe/Kalman-and-Bayesian-Filters-in-Python</a>. Accessed: 2023-08-10.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>You11<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id4">3</a>)</span>
+<p>Peter C Young. <em>Recursive estimation and time-series analysis: An introduction for the student and practitioner</em>. Springer Science &amp; Business Media, 2011.</p>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1867,15 +1854,6 @@ Q * 0.0.  R * 0.1.
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="markdown-notebooks.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Notebooks with MyST Markdown</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
@@ -1894,7 +1872,21 @@ Q * 0.0.  R * 0.1.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Global Temp Anomaly Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Kalman Filters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-concepts">High Level Concepts</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-intuition-underlying-the-kalman-filter">The Bayesian Intuition underlying the Kalman Filter</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-1d-kalman-filter">Implementing the 1D Kalman Filter</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-on-temperature-data">Demonstration on temperature data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-kalman-filter-applied-to-non-linear-data">A linear kalman filter applied to non-linear data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code">CODE</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#global-temp-anomaly-data">Global Temp Anomaly Data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-style-implementation">Bayesian Style Implementation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rewriting-in-standard-notation">Rewriting in Standard notation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-how-the-kalman-filter-behaves-with-data-gaps">Exploring how the kalman filter behaves with data gaps</a></li>
@@ -1915,19 +1907,7 @@ Q * 0.0.  R * 0.1.
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-residuals">Exploring Residuals</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-initial-state-guess-perturbations">Exploring initial state guess perturbations</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-parameter-space-for-the-multivariable-kalman-filter-example">Exploring parameter space for the multivariable kalman filter example</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#writeup">WRITEUP</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kalman-filter-high-level-concepts">Kalman Filter - High Level Concepts</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-intuition-underlying-the-kalman-filter">The Bayesian Intuition underlying the Kalman Filter</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-the-1d-kalman-filter">Implementing the 1D Kalman Filter</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-on-temperature-data">Demonstration on temperature data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-kalman-filter-applied-to-non-linear-data">A linear kalman filter applied to non-linear data</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliography">Bibliography</a></li>
 </ul>
 
   </nav></div>
