@@ -8,11 +8,9 @@ To simplify the discussion, we will makes some assumptions:
 
 Under such assumptions we can represent our process and measurements as follows:
 
-$
-\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k)
-\\
-\vec{z}(k) = H \vec{x}(k) + \vec{\xi}(k)
-$
+    $\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k)$
+
+    $\vec{z}(k) = H \vec{x}(k) + \vec{\xi}(k)$
 
 Where $\vec{\eta}(k) \sim \mathcal{N}(0, Q)$ and $\vec{\xi}(k) \sim \mathcal{N}(0, R)$ 
 
