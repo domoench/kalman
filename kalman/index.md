@@ -8,7 +8,7 @@ To simplify the discussion, we will makes some assumptions:
 
 Under such assumptions we can represent our process and measurements as follows:
 
-    $\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k)$
+    $\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k-1)$
 
     $\vec{z}(k) = H \vec{x}(k) + \vec{\xi}(k)$
 
