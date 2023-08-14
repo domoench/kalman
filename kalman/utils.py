@@ -4,6 +4,8 @@ from matplotlib.patches import Ellipse
 import matplotlib.transforms as transforms
 from scipy import linalg
 
+rng = np.random.default_rng(seed=1)
+
 # Plot an ellipse representation of covariance for a 2D gaussian distribution
 # Params
 # - S: Covariance 2x2 matrix
@@ -69,3 +71,18 @@ def separate_covar_series(Ps):
         vel_vars[i] = np.array([[P[1,1], P[1,4]],[P[4,1], P[4,4]]])
         acc_vars[i] = np.array([[P[2,2], P[2,5]],[P[5,2], P[5,5]]])
     return pos_vars, vel_vars, acc_vars
+
+# Muller algorithm.
+# Return a point, selected at uniform random, on a (d-1)-sphere of radius r
+def random_point_on_dsphere(r=1, d=2, v0=np.zeros(2)):
+    """
+    Args
+        r: Radius of the d-sphere
+        d: Dimension of space. e.g. d=3 creates a sphere (a 2-sphere: 2 degrees of freedom).
+        v0: Origin of the d-sphere
+    """
+    # Pick a d-dimensional direction vector
+    # Each component independently drawn from ~N(0,1)
+    v = rng.normal(0, 1, d)
+    d = np.linalg.norm(v)
+    return v0 + (r * v/d)
