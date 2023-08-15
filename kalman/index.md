@@ -1,6 +1,6 @@
 # Kalman Filters: High Level Concepts
 
-Fundamentally, the Kalman Filter is an algorithm that solves the _filtering problem_. The filtering problem involves finding the best estimate $\hat{x}(t)$ of some true process $\vec{x}(t)$ given noisy measurements $\vec{z}(t)$. There are 2 sources of stochastic noise: process noise (noise within $\vec{x}(t)$ itself) and measurement noise. 
+Fundamentally, the Kalman Filter is an algorithm that solves the _filtering problem_ {cite}`oksendal2013`. The filtering problem involves finding the best estimate $\hat{x}(t)$ of some true process $\vec{x}(t)$ given noisy measurements $\vec{z}(t)$. There are 2 sources of stochastic noise: process noise (noise within $\vec{x}(t)$ itself) and measurement noise. 
 
 To simplify the discussion, we will makes some assumptions: 
 - Both forms of noise are gaussian and time-invariant. Both are white noise: the process noise covariance matrix $Q$ and measurement noise covariance matrix $R$ are diagonal matrices.
@@ -8,13 +8,13 @@ To simplify the discussion, we will makes some assumptions:
 
 Under such assumptions we can represent our process and measurements as follows:
 
-    $\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k-1)$
+$$
+\vec{x}(k) = F \vec{x}(k-1) + \vec{\eta}(k-1)
+\\
+\vec{z}(k) = H \vec{x}(k) + \vec{\xi}(k)
+$$
 
-    $\vec{z}(k) = H \vec{x}(k) + \vec{\xi}(k)$
-
-Where $\vec{\eta}(k) \sim \mathcal{N}(0, Q)$ and $\vec{\xi}(k) \sim \mathcal{N}(0, R)$ 
-
-{cite}`young2011recursive` (4.44).
+Where $\vec{\eta}(k) \sim \mathcal{N}(0, Q)$ and $\vec{\xi}(k) \sim \mathcal{N}(0, R)$. {cite}`young2011recursive` (4.44).
 
 The Kalman Filter algorithm can be summarized as follows. At the $k$-th iteration: 
 
