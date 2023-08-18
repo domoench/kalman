@@ -7,8 +7,8 @@ An interactive HTML version of this jupyter book is available at https://domoenc
 Fundamentally, the Kalman Filter is an algorithm that solves the _filtering problem_ {cite}`oksendal2013`. The filtering problem involves finding the best estimate $\hat{x}(t)$ of some true process $\vec{x}(t)$ given noisy measurements $\vec{z}(t)$. There are 2 sources of stochastic noise: process noise (noise within $\vec{x}(t)$ itself) and measurement noise. 
 
 To simplify the discussion, we will makes some assumptions: 
-- Both forms of noise are gaussian and time-invariant. Both are white noise: the process noise covariance matrix $Q$ and measurement noise covariance matrix $R$ are diagonal matrices.
-- The process is linear
+- Both forms of noise are gaussian and time-invariant. Both are white noise: the process noise covariance matrix $Q$ and measurement noise covariance matrix $R$ are diagonal.
+- The process is linear.
 
 Under such assumptions we can represent our process and measurements as follows:
 

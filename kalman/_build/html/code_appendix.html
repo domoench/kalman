@@ -199,50 +199,18 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="article-header-buttons">
 
 
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/domoench/kalman" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
+<a href="https://github.com/domoench/kalman" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
    title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/domoench/kalman/issues/new?title=Issue%20on%20page%20%2Fcode_appendix.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
 
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
 </a>
-</li>
-      
-  </ul>
-</div>
 
 
 
@@ -446,7 +414,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fed20fcce05d436f61634f00c2b3e54b56dda7e33780e473a536f3f5481239cc.png" src="_images/fed20fcce05d436f61634f00c2b3e54b56dda7e33780e473a536f3f5481239cc.png" />
+<img alt="_images/de04a8bc9cd725e7e687cceaa9d3c1296772726eda35ed85da5bb22ebcdb1239.png" src="_images/de04a8bc9cd725e7e687cceaa9d3c1296772726eda35ed85da5bb22ebcdb1239.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>My implementation matches that of matplotlib&#39;s example code
 </pre></div>
 </div>
@@ -458,12 +426,7 @@ document.write(`
 <p>Demonstrate my utility function that determines if a given 2D point <span class="math notranslate nohighlight">\(\vec{p}\)</span> is in the closure of a given confidence ellipse centered at <span class="math notranslate nohighlight">\(\mu\)</span> with semi-major axis <span class="math notranslate nohighlight">\(r_1\)</span>, semi-minor axis <span class="math notranslate nohighlight">\(r_2\)</span>. (<span class="math notranslate nohighlight">\(r_1 = \alpha \sqrt{\lambda_1}\)</span> and <span class="math notranslate nohighlight">\(r_2 = \alpha \sqrt{\lambda_2}\)</span> where <span class="math notranslate nohighlight">\(\alpha\)</span> scales the number of standard deviations we wish the ellipse to visualize)</p>
 <p>If</p>
 <p><span class="math notranslate nohighlight">\(\left(\frac{cos(\theta)(p_x-\mu_x)+sin(\theta)(p_y-\mu_y)}{r_1}\right)^2 + \left(\frac{sin(\theta)(p_x-\mu_x)-cos(\theta)(p_y-\mu_y)}{r_2}\right)^2 \leq 1\)</span></p>
-<p>Then <span class="math notranslate nohighlight">\(\vec{p}\)</span> is inside the ellipse.</p>
-<p>TODO: CITE</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://stackoverflow.com/questions/7946187/point-and-ellipse-rotated-position-test-algorithm">https://stackoverflow.com/questions/7946187/point-and-ellipse-rotated-position-test-algorithm</a></p></li>
-<li><p><a class="reference external" href="https://cookierobotics.com/007/">https://cookierobotics.com/007/</a></p></li>
-</ul>
+<p>Then <span class="math notranslate nohighlight">\(\vec{p}\)</span> is inside the ellipse. <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="How to draw ellipse of covariance matrix. https://cookierobotics.com/007/. Accessed: 2023-08-18.">cov</a>]</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define our ellipse</span>
@@ -492,7 +455,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/31340fe6fd7e2ca056bdededd9cd450b7ad23c18071738b7268014d39779fc17.png" src="_images/31340fe6fd7e2ca056bdededd9cd450b7ad23c18071738b7268014d39779fc17.png" />
+<img alt="_images/66300a94888e1707a85caa2f33a376cdbc95224c544acad359c91ae1c5e7c3f9.png" src="_images/66300a94888e1707a85caa2f33a376cdbc95224c544acad359c91ae1c5e7c3f9.png" />
 </div>
 </div>
 </section>
@@ -561,10 +524,10 @@ document.write(`
 </section>
 <section id="muller-algorithm">
 <span id="muller-algo"></span><h2><span class="section-number">4.4. </span>Muller Algorithm<a class="headerlink" href="#muller-algorithm" title="Permalink to this heading">#</a></h2>
-<p>The Muller algorithm is a method to efficiently generate random samples on the surface of a (<span class="math notranslate nohighlight">\(d-1\)</span>)-sphere. The algorithm is based on the fact that the joint distribution of <span class="math notranslate nohighlight">\(d\)</span> normally distributed RVs can be mapped to vectors that are uniformly distributed along the surface of a (<span class="math notranslate nohighlight">\(d-1\)</span>)-sphere. <span id="id1">[<a class="reference internal" href="bibliography.html#id6" title="Martin Roberts. How to generate uniformly random points on n-spheres and in n-balls. https://extremelearning.com.au/how-to-generate-uniformly-random-points-on-n-spheres-and-n-balls/, 2019. Accessed: 2023-08-14.">Rob19</a>]</span></p>
+<p>The Muller algorithm is a method to efficiently generate random samples on the surface of a (<span class="math notranslate nohighlight">\(d-1\)</span>)-sphere. The algorithm is based on the fact that the joint distribution of <span class="math notranslate nohighlight">\(d\)</span> normally distributed RVs can be mapped to vectors that are uniformly distributed along the surface of a (<span class="math notranslate nohighlight">\(d-1\)</span>)-sphere. <span id="id2">[<a class="reference internal" href="bibliography.html#id6" title="Martin Roberts. How to generate uniformly random points on n-spheres and in n-balls. https://extremelearning.com.au/how-to-generate-uniformly-random-points-on-n-spheres-and-n-balls/, 2019. Accessed: 2023-08-14.">Rob19</a>]</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Testing muller algorithm to generate uniform points on a (d-1)-sphere</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Testing Muller algorithm to generate uniform points on a (d-1)-sphere</span>
 
 <span class="c1"># d=2: Circle (d-1 = 1 degree of freedom)</span>
 <span class="n">figure</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> 

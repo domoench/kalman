@@ -16,6 +16,7 @@ scipy = "*"
 ipykernel = "*"
 ipython = "*"
 docutils = "0.17.1"
+jupyterlab-spellchecker = "*"
 
 [dev-packages]
 

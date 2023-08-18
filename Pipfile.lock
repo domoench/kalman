@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d4ff32b98239f7129ae17715cc2828031e1d9bb2a83a404a45e15288a5ba6de8"
+            "sha256": "3b7249b576b72ea99550448ed3bfdbb58ac75966775cbd2efdad6e04d854169b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -774,6 +774,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==2.24.0"
+        },
+        "jupyterlab-spellchecker": {
+            "hashes": [
+                "sha256:2701999d6a826e0a54a12fa41c60b9ffef220ee267e78fe20144423dbcc6d6d8",
+                "sha256:e0722f00c795e8b5d60655ed475dd91a67fe7180c32ac891a50f38c7abc7684b"
+            ],
+            "index": "pypi",
+            "version": "==0.8.4"
         },
         "jupyterlab-widgets": {
             "hashes": [
