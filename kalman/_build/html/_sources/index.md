@@ -1,5 +1,7 @@
 # The Kalman Filter
 
+An interactive HTML version of this jupyter book is available at https://domoench.github.io/kalman. That is more pleasant to use than the PDF version.
+
 ## High Level Concepts
 
 Fundamentally, the Kalman Filter is an algorithm that solves the _filtering problem_ {cite}`oksendal2013`. The filtering problem involves finding the best estimate $\hat{x}(t)$ of some true process $\vec{x}(t)$ given noisy measurements $\vec{z}(t)$. There are 2 sources of stochastic noise: process noise (noise within $\vec{x}(t)$ itself) and measurement noise. 
