@@ -1,2 +1,5 @@
-kalman/_build/
 kalman/.ipynb_checkpoints/
+kalman/_build/jupyter_execute
+kalman/_build/latex
+kalman/_build/.DS_Store
+kalman/_build/.doctrees/

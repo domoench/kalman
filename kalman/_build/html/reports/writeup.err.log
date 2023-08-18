@@ -1,0 +1,108 @@
+Traceback (most recent call last):
+  File "/Users/davidmoench/.local/share/virtualenvs/jupyterbook-eAO5T2Nm/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/davidmoench/.local/share/virtualenvs/jupyterbook-eAO5T2Nm/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/davidmoench/.local/share/virtualenvs/jupyterbook-eAO5T2Nm/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/davidmoench/.pyenv/versions/3.10.0/lib/python3.10/asyncio/base_events.py", line 641, in run_until_complete
+    return future.result()
+  File "/Users/davidmoench/.local/share/virtualenvs/jupyterbook-eAO5T2Nm/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/davidmoench/.local/share/virtualenvs/jupyterbook-eAO5T2Nm/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/davidmoench/.local/share/virtualenvs/jupyterbook-eAO5T2Nm/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# TODO APPROACH 2 - plot a scatterplot of perturbation scale vs accuracy score
+d = len(xs[0])
+num_incr = 20
+samples_per_incr = 100
+
+# For each initial state guess perturbation scale, we'll track the 3-sigma membership
+# accuracy score.
+accuracy_3sm = []
+accuracy_nees = []
+
+# For p in a set of increasing distances (relative scale to true x0's norm)
+for p in np.linspace(0.0, 20.0, num=num_incr):
+    # print(f'Random initial state perturbation: {p:.0f} x true initial state norm:')
+    
+    # Generate random initial state vectors perturbed by p from true initial state x0
+    x0_norm = np.linalg.norm(true_xs[0])
+    r = x0_norm * p
+    init_points = np.full((samples_per_incr, d), np.nan)
+    for i in range(samples_per_incr):
+        init_points[i] = random_point_on_dsphere(r=r, d=d, v0=true_xs[0]) # TODO reference this perturbation strategy description
+
+    # Run Kalman filter and check accuracy for each initial (position) state guess
+    for v_0 in init_points:
+        P_0 = np.eye(6) * 50 # Start with very low confidence in predictions
+        xs, Ps = kalman_6d(zs, R, Q, v_0, P_0)
+        xs_pos, _, _ = utils.separate_state_series(xs)
+        true_xs_pos, _, _ = utils.separate_state_series(true_xs)
+        Ps_pos, _, _ = utils.separate_covar_series(Ps)
+        ratio = ratio_within_confidence_ellipse(true_xs_pos, xs_pos, Ps_pos)
+        accuracy_3sm.append((p, ratio))
+        # TODO Calculate accuracy ratios for velocity and acceleration also?
+        # Calculate mean NEES score
+        accuracy_nees.append((p, mean_nees(true_xs_pos, xs_pos, Ps_pos)))
+        
+accuracy_3sm = np.array(accuracy_3sm)
+accuracy_nees = np.array(accuracy_nees)
+assert len(accuracy_3sm) == num_incr * samples_per_incr
+
+# Calculate mean accuracy score for each perturbation scale value
+# Had to do so manually because I couldn't get np's 2d Histogram working
+x_vals = np.unique(accuracy_3sm[:,0])
+avg_y_vals_3sm = np.zeros(len(x_vals))
+avg_y_vals_nees = np.zeros(len(x_vals))
+d_3sm = dict(zip(x_vals, [[] for i in range(len(x_vals))]))
+d_nees = dict(zip(x_vals, [[] for i in range(len(x_vals))]))
+for i in range(len(accuracy_3sm)):
+    p, score_3sm = accuracy_3sm[i]
+    d_3sm[p].append(score_3sm)
+    p, score_nees = accuracy_nees[i]
+    d_nees[p].append(score_nees)
+for i in range(len(x_vals)):
+    x = x_vals[i]
+    y_vals_3sm = d_3sm[x]
+    avg_y_vals_3sm[i] = np.mean(y_vals_3sm)
+    y_vals_nees = d_nees[x]
+    avg_y_vals_nees[i] = np.mean(y_vals_nees)
+
+# Plot 3-sigma membership accuracy vs peturbation scale
+fig, ax = plt.subplots(figsize=(8,5))
+ax.scatter(accuracy_3sm[:,0], accuracy_3sm[:,1], s=1, alpha=0.2)
+ax.plot(x_vals, avg_y_vals_3sm, color='green', label='Avg. Accuracy')
+ax.set_xlabel("Initial State Guess Perturbation Scale")
+ax.set_ylabel(r"Covariance 3-$\sigma$ Ellipse Accuracy Score")
+ax.set_title("")
+ax.legend()
+plt.show()
+glue('3sm_v_perturbation', fig, display=False)
+
+# Plot NEES mean accuracy vs perturbation scale
+fig, ax = plt.subplots(figsize=(8,5))
+ax.scatter(accuracy_nees[:,0], accuracy_nees[:,1], s=1, alpha=0.2)
+ax.plot(x_vals, avg_y_vals_nees, color='green', label='Avg. Accuracy')
+ax.set_xlabel("Initial State Guess Perturbation Scale")
+ax.set_ylabel(r"Mean NEES Accuracy Score")
+ax.legend()
+plt.show()
+glue('nees_v_perturbation', fig, display=False)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[16], line 20[0m
+[1;32m     18[0m init_points [38;5;241m=[39m np[38;5;241m.[39mfull((samples_per_incr, d), np[38;5;241m.[39mnan)
+[1;32m     19[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m(samples_per_incr):
+[0;32m---> 20[0m     init_points[i] [38;5;241m=[39m [43mrandom_point_on_dsphere[49m(r[38;5;241m=[39mr, d[38;5;241m=[39md, v0[38;5;241m=[39mtrue_xs[[38;5;241m0[39m]) [38;5;66;03m# TODO reference this perturbation strategy description[39;00m
+[1;32m     22[0m [38;5;66;03m# Run Kalman filter and check accuracy for each initial (position) state guess[39;00m
+[1;32m     23[0m [38;5;28;01mfor[39;00m v_0 [38;5;129;01min[39;00m init_points:
+
+[0;31mNameError[0m: name 'random_point_on_dsphere' is not defined
+
