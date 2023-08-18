@@ -15,6 +15,7 @@ pandas = "*"
 scipy = "*"
 ipykernel = "*"
 ipython = "*"
+docutils = "0.17.1"
 
 [dev-packages]
 
