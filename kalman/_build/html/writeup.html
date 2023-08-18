@@ -335,7 +335,7 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance">1.2.3. Performance</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-state-estimate-perturbation">1.2.3.1. Initial state estimate perturbation</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#q-r-perturbation-from-true-values">1.2.3.2. <span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span> perturbation from true values.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#q-r-perturbation-from-their-true-values">1.2.3.2. <span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span> perturbation from their true values.</a></li>
 </ul>
 </li>
 </ul>
@@ -383,6 +383,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="writeup">
 <h1><span class="section-number">1. </span>Writeup<a class="headerlink" href="#writeup" title="Permalink to this heading">#</a></h1>
+<p>I summarize my explorations and findings in this Writeup section.</p>
 <section id="the-1d-kalman-filter">
 <h2><span class="section-number">1.1. </span>The 1D Kalman Filter<a class="headerlink" href="#the-1d-kalman-filter" title="Permalink to this heading">#</a></h2>
 <p>Here we implement the 1D Kalman filter and apply it to a simple problem involving global temperature data.</p>
@@ -432,6 +433,7 @@ document.write(`
 </figure>
 <p><a class="reference internal" href="#kt-lqhr-fig"><span class="std std-numref">Fig. 1.2</span></a> Shows Low Q and High R (<span class="math notranslate nohighlight">\(Q\)</span> = <span class="output text_plain">0.0</span>, <span class="math notranslate nohighlight">\(R\)</span> = <span class="output text_plain">3.0</span>). The result is an estimate that lags behind the upward trend of the measurements, because the constant-temp process model’s predictions are weighted more heavily than the measurements.</p>
 <p><a class="reference internal" href="#kt-hqlr-fig"><span class="std std-numref">Fig. 1.3</span></a> Shows High Q and Low R (<span class="math notranslate nohighlight">\(Q\)</span> = <span class="output text_plain">3.0</span>, <span class="math notranslate nohighlight">\(R\)</span> = <span class="output text_plain">0.0</span>). The result is a jagged estimate that hugs the data points tightly because our filter assumes no measurement noise.</p>
+<p>The code that generated both the above figures is in <a class="reference internal" href="#exploring-param-space-1d"><span class="std std-numref">Section 2.2.3</span></a>.</p>
 </section>
 <section id="behavior-in-the-presence-of-data-gaps">
 <h3><span class="section-number">1.1.4. </span>Behavior in the presence of data gaps<a class="headerlink" href="#behavior-in-the-presence-of-data-gaps" title="Permalink to this heading">#</a></h3>
@@ -449,7 +451,7 @@ document.write(`
 <section id="implementation-and-synthesis-of-input-data">
 <h3><span class="section-number">1.2.1. </span>Implementation and synthesis of input data<a class="headerlink" href="#implementation-and-synthesis-of-input-data" title="Permalink to this heading">#</a></h3>
 <p>I implemented a multivariate Kalman Filter (<a class="reference internal" href="#multivar-kf-implementation"><span class="std std-numref">Section 2.4.3</span></a>) and synthesized a true 6-dimensional data series <span class="math notranslate nohighlight">\(\vec{x}(k)\)</span> for a moving object under constant acceleration and its measurements <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span> (<a class="reference internal" href="#synth-true-state"><span class="std std-numref">Section 2.4.1</span></a>).</p>
-<figure class="align-default" id="mv-kf-pos" style="width: 500px">
+<figure class="align-default" id="mv-kf-pos" style="width: 650px">
 <img alt="_images/9403d6286f10c1e30d26f1dc117c2da815d1c9cf99e64824123f0094f6378427.png" src="_images/9403d6286f10c1e30d26f1dc117c2da815d1c9cf99e64824123f0094f6378427.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">The filter produces a position estimate that is convincingly close to the true state’s postition.</span><a class="headerlink" href="#mv-kf-pos" title="Permalink to this image">#</a></p>
@@ -462,7 +464,7 @@ document.write(`
 <figure class="align-default" id="mv-kf-pva-variances" style="width: 750px">
 <img alt="_images/ad77c6161464b27f6e8fea427d23472286a5e23881be280f569233402f3f0da2.png" src="_images/ad77c6161464b27f6e8fea427d23472286a5e23881be280f569233402f3f0da2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Estimate variances over time</span><a class="headerlink" href="#mv-kf-pva-variances" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Estimates and their respective variances over time.</span><a class="headerlink" href="#mv-kf-pva-variances" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We see the position estimate quickly converges close to the true position, and similarly the position estimate’s variance
@@ -476,7 +478,7 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 <span id="id3"></span><h3><span class="section-number">1.2.2. </span>Accuracy Metrics<a class="headerlink" href="#accuracy-metrics" title="Permalink to this heading">#</a></h3>
 <p>I primarily explore 2 methods of quantifying accuracy:</p>
 <ol class="arabic simple">
-<li><p>Normalized Estimated Error Squared (NEES)</p></li>
+<li><p>Normalized Estimated Error Squared (NEES).</p></li>
 <li><p><span class="math notranslate nohighlight">\(3 \sigma\)</span> Membership Accuracy Score: The ratio of estimates <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> whose <span class="math notranslate nohighlight">\(3 \sigma\)</span> covariance ellipses of <span class="math notranslate nohighlight">\(P(k)\)</span> contain the true state <span class="math notranslate nohighlight">\(\vec{x}(k)\)</span>.</p></li>
 </ol>
 <section id="normalized-estimated-error-squared-nees">
@@ -485,7 +487,7 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 </section>
 <section id="sigma-membership-accuracy-score">
 <h4><span class="section-number">1.2.2.2. </span><span class="math notranslate nohighlight">\(3 \sigma\)</span> Membership Accuracy Score<a class="headerlink" href="#sigma-membership-accuracy-score" title="Permalink to this heading">#</a></h4>
-<p>I implemented this intuitive and simple way of quantifying the accuracy of the Kalman filter’s estimates.</p>
+<p>I implemented an intuitive and simple way of quantifying the accuracy of the Kalman filter’s estimates.</p>
 <p>The score works as follows. For each estimate <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span>, check if the associated true state point <span class="math notranslate nohighlight">\(\vec{x}(k)\)</span> falls within the <span class="math notranslate nohighlight">\(3\sigma\)</span> covariance ellipse for <span class="math notranslate nohighlight">\(P(k)\)</span>. Then simply compute the ratio of estimates for which <span class="math notranslate nohighlight">\(\vec{x}(k)\)</span> is a member of <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span>’s ellipse out of all estimates. Implementation in <a class="reference internal" href="#sig-membership-implementation"><span class="std std-numref">Section 2.4.6.2</span></a>.</p>
 <p>Here’s a visualized example, where the Kalman filter’s <span class="math notranslate nohighlight">\(3\sigma\)</span> membership accuracy score is <span class="output text_plain">0.8</span>:</p>
 <figure class="align-default" id="sig-membership-viz" style="width: 650px">
@@ -502,7 +504,7 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 <p>Our filter’s behavior is dependent on our choice of a few parameters, including an initial state estimate <span class="math notranslate nohighlight">\(\hat{x}(0)\)</span>, initial estimate covariance <span class="math notranslate nohighlight">\(P(0)\)</span>, and covariances <span class="math notranslate nohighlight">\(R\)</span>, and <span class="math notranslate nohighlight">\(Q\)</span>. How sensitive is the filter’s accuracy to the perturbations to those parameters?</p>
 <section id="initial-state-estimate-perturbation">
 <h4><span class="section-number">1.2.3.1. </span>Initial state estimate perturbation<a class="headerlink" href="#initial-state-estimate-perturbation" title="Permalink to this heading">#</a></h4>
-<p>We can use Monte Carlo methods to explore the relationship between initial state estimate perturbations and the filter accuracy distribution. As perturbations to the initial state guess <span class="math notranslate nohighlight">\(\hat{x}(0)\)</span> increase, the sample mean of both accuracy metrics decrease (and variance increases):</p>
+<p>I used Monte Carlo methods to explore the relationship between initial state estimate perturbations and the filter accuracy distribution. As perturbations to the initial state guess <span class="math notranslate nohighlight">\(\hat{x}(0)\)</span> increase, the sample mean of both accuracy metrics decreases and variance increases:</p>
 <figure class="align-default" id="sm-v-perturbation" style="width: 550px">
 <img alt="_images/547a3e1708760691f77e5038c7dbe2e7696d631b26ba3c3ff1e3a4ecff1590aa.png" src="_images/547a3e1708760691f77e5038c7dbe2e7696d631b26ba3c3ff1e3a4ecff1590aa.png" />
 </figure>
@@ -512,12 +514,12 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 <p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">Increasing average NEES scores means lower overall estimate accuracy.</span><a class="headerlink" href="#nees-v-perturbation" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Code that produced both figures above is in <a class="reference internal" href="#init-state-pertub"><span class="std std-numref">Section 2.4.7</span></a>. Random perturbation vectors were generated on a <span class="math notranslate nohighlight">\((d-1)\)</span>-balls of increasing radii via the Muller method <a class="reference internal" href="code_appendix.html#muller-algo"><span class="std std-numref">Section 4.4</span></a>).</p>
+<p>The code that produced both figures above is in <a class="reference internal" href="#init-state-pertub"><span class="std std-numref">Section 2.4.7</span></a>. Random perturbation vectors were generated on <span class="math notranslate nohighlight">\((d-1)\)</span>-balls of increasing radii via the Muller method <a class="reference internal" href="code_appendix.html#muller-algo"><span class="std std-numref">Section 4.4</span></a>).</p>
 </section>
-<section id="q-r-perturbation-from-true-values">
-<h4><span class="section-number">1.2.3.2. </span><span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span> perturbation from true values.<a class="headerlink" href="#q-r-perturbation-from-true-values" title="Permalink to this heading">#</a></h4>
+<section id="q-r-perturbation-from-their-true-values">
+<h4><span class="section-number">1.2.3.2. </span><span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span> perturbation from their true values.<a class="headerlink" href="#q-r-perturbation-from-their-true-values" title="Permalink to this heading">#</a></h4>
 <p>What if we didn’t know the true values of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span> and needed to approximate or guess their values? How does the filter’s accuracy change as a function of a perturbations of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span> from their true values?</p>
-<p>In <a class="reference internal" href="#qr-param-space"><span class="std std-numref">Section 2.4.8</span></a> I numerically explore a section of the (<span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span>) parameter space and produce accuracy surfaces (for <a class="reference internal" href="#accuracy-metrics"><span class="std std-ref">both metrics</span></a>):</p>
+<p>In <a class="reference internal" href="#qr-param-space"><span class="std std-numref">Section 2.4.8</span></a> I numerically explore a sub-section of the (<span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span>) parameter space and produce accuracy surfaces (for <a class="reference internal" href="#accuracy-metrics"><span class="std std-ref">both metrics</span></a>):</p>
 <figure class="align-default" id="acc-surface-fig" style="width: 700px">
 <img alt="_images/f8cb365c35ffd59c4d68b63043a7fa36fd5e4bea39b20bc6c025f635c1539e19.png" src="_images/f8cb365c35ffd59c4d68b63043a7fa36fd5e4bea39b20bc6c025f635c1539e19.png" />
 </figure>
@@ -528,6 +530,7 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="code">
 <h1><span class="section-number">2. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h1>
+<p>Below are the details of my analysis, including code implementation and low-level explanations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -685,7 +688,7 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 </div>
 </section>
 <section id="exploring-the-parameter-space-of-q-x-r">
-<h3><span class="section-number">2.2.3. </span>Exploring the parameter space of <span class="math notranslate nohighlight">\(Q\)</span> x <span class="math notranslate nohighlight">\(R\)</span><a class="headerlink" href="#exploring-the-parameter-space-of-q-x-r" title="Permalink to this heading">#</a></h3>
+<span id="exploring-param-space-1d"></span><h3><span class="section-number">2.2.3. </span>Exploring the parameter space of <span class="math notranslate nohighlight">\(Q\)</span> x <span class="math notranslate nohighlight">\(R\)</span><a class="headerlink" href="#exploring-the-parameter-space-of-q-x-r" title="Permalink to this heading">#</a></h3>
 <p>Illustrating how the measurement noise covariance <span class="math notranslate nohighlight">\(R\)</span>, and process noise covariance is <span class="math notranslate nohighlight">\(Q\)</span> affect the behavior of the 1D Kalman filter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1674,7 +1677,7 @@ Q:
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance">1.2.3. Performance</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-state-estimate-perturbation">1.2.3.1. Initial state estimate perturbation</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#q-r-perturbation-from-true-values">1.2.3.2. <span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span> perturbation from true values.</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#q-r-perturbation-from-their-true-values">1.2.3.2. <span class="math notranslate nohighlight">\(Q\)</span>,<span class="math notranslate nohighlight">\(R\)</span> perturbation from their true values.</a></li>
 </ul>
 </li>
 </ul>
