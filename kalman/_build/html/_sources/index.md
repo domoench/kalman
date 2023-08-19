@@ -1,6 +1,6 @@
-# The Kalman Filter
-
 An interactive HTML version of this jupyter book is available at https://domoench.github.io/kalman. That is more pleasant to use than the PDF version.
+
+# The Kalman Filter
 
 ## High Level Concepts
 
@@ -29,3 +29,5 @@ The Kalman Filter algorithm can be summarized as follows. At the $k$-th iteratio
     - Update the prediction $\hat{x}(k | k-1)$ with the information $\vec{z}(k)$. The estimate $\hat{x}(k)$ will fall along the residual between the prediction and measurement. The uncertainties of the measurement and prediction are used to calculate the Kalman Gain, which scales how far long that residual vector the estimate $\hat{x}(k)$ will fall. For example, if the measurement's uncertainty (quantified by $R$) is much less than the prediction's uncertainty (quantified by $P$), $\hat{x}(k)$ will fall much closer to $\vec{z}(k)$.
 
 The exact formulas for the algorithm outlined above can be found in {cite}`young2011recursive` Chapter 4.4.
+
+Next, continue on to the [writeup section](writeup).

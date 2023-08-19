@@ -3,6 +3,7 @@
 
 title: SDEs Project - The Kalman Filter
 author: David Ouyang Moench
+copyright: "2023"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

@@ -77,7 +77,7 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -340,11 +340,12 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.3. Conclusion</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code">2. Code</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-temp-anomaly-data">2.1. Global Temp Anomaly Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2. The 1D Kalman Filter</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2. The 1D Kalman Filter</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-kalman-implementation">2.2.1. Implementation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-how-the-kalman-filter-behaves-with-data-gaps">2.2.2. Exploring how the kalman filter behaves with data gaps</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-the-parameter-space-of-q-x-r">2.2.3. Exploring the parameter space of <span class="math notranslate nohighlight">\(Q\)</span> x <span class="math notranslate nohighlight">\(R\)</span></a></li>
@@ -382,20 +383,20 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="writeup">
-<h1><span class="section-number">1. </span>Writeup<a class="headerlink" href="#writeup" title="Permalink to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">1. </span>Writeup<a class="headerlink" href="#writeup" title="Permalink to this heading">#</a></h1>
 <p>I summarize my explorations and findings in this Writeup section.</p>
 <section id="the-1d-kalman-filter">
 <h2><span class="section-number">1.1. </span>The 1D Kalman Filter<a class="headerlink" href="#the-1d-kalman-filter" title="Permalink to this heading">#</a></h2>
 <p>Here we implement the 1D Kalman filter and apply it to a simple problem involving global temperature data.</p>
 <section id="implementation">
 <h3><span class="section-number">1.1.1. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h3>
-<p>As in <span id="id1">[<a class="reference internal" href="bibliography.html#id3" title="Peter C Young. Recursive estimation and time-series analysis: An introduction for the student and practitioner. Springer Science &amp; Business Media, 2011.">You11</a>]</span> (Chapter 4.4, moving body example) we implement the linear Kalman filter to estimate a single state variable over time.</p>
+<p>As in <span id="id2">[<a class="reference internal" href="bibliography.html#id3" title="Peter C Young. Recursive estimation and time-series analysis: An introduction for the student and practitioner. Springer Science &amp; Business Media, 2011.">You11</a>]</span> (Chapter 4.4, moving body example) we implement the linear Kalman filter to estimate a single state variable over time.</p>
 <p>The code for that implementation is in <a class="reference internal" href="#d-kalman-implementation"><span class="std std-numref">Section 2.2.1</span></a>.</p>
 </section>
 <section id="demonstration-on-temperature-data">
 <h3><span class="section-number">1.1.2. </span>Demonstration on temperature data<a class="headerlink" href="#demonstration-on-temperature-data" title="Permalink to this heading">#</a></h3>
 <p>As Young points out, there is a relationship between the filtering problem and regression. We can transform a regression problem into the filtering problem, then apply the Kalman Filter.</p>
-<p>To demonstrate this, take the following data set from NASA <span id="id2">[<a class="reference internal" href="bibliography.html#id5" title="Global land-ocean temperature index. https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt. Accessed: 2023-08-10.">nas</a>]</span>, which depicts the annual global average temperature as compared to a baseline temperature (the average temperature over the period of 1951 to 1980):</p>
+<p>To demonstrate this, take the following data set from NASA <span id="id3">[<a class="reference internal" href="bibliography.html#id5" title="Global land-ocean temperature index. https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt. Accessed: 2023-08-10.">nas</a>]</span>, which depicts the annual global average temperature as compared to a baseline temperature (the average temperature over the period of 1951 to 1980):</p>
 <figure class="align-default" id="global-temp-fig" style="width: 600px">
 <img alt="_images/89866adc6a92c7995baa21ff7ab1816ce80660f07b4fd51377413ed3b6b47b8e.png" src="_images/89866adc6a92c7995baa21ff7ab1816ce80660f07b4fd51377413ed3b6b47b8e.png" />
 </figure>
@@ -441,7 +442,7 @@ document.write(`
 <figure class="align-default" id="kt-data-gap" style="width: 500px">
 <img alt="_images/80d8f1c5c1da42b3c26bdd850998d80b8b25deb1ffb5b6fcaf1006011fdad060.png" src="_images/80d8f1c5c1da42b3c26bdd850998d80b8b25deb1ffb5b6fcaf1006011fdad060.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">The <span class="math notranslate nohighlight">\(1 \sigma\)</span> error bounds depicting <span class="math notranslate nohighlight">\(P(k)\)</span> grows over a period of missing measurement data, before contracting quickly once new data points come in. Code in <a class="reference internal" href="#id6"><span class="std std-numref">Section 2.2.2</span></a>.</span><a class="headerlink" href="#kt-data-gap" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">The <span class="math notranslate nohighlight">\(1 \sigma\)</span> error bounds depicting <span class="math notranslate nohighlight">\(P(k)\)</span> grows over a period of missing measurement data, before contracting quickly once new data points come in. Code in <a class="reference internal" href="#id8"><span class="std std-numref">Section 2.2.2</span></a>.</span><a class="headerlink" href="#kt-data-gap" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -475,7 +476,7 @@ document.write(`
 rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-variances"><span class="std std-numref">Fig. 1.6</span></a> shows the steep reduction in <span class="math notranslate nohighlight">\(\sigma_{x}\)</span> and <span class="math notranslate nohighlight">\(\sigma_{y}\)</span>, and that a similar convergence plays out for the velocity estimates/variance at a slower rate, and for acceleration at a slower rate still.</p>
 </section>
 <section id="accuracy-metrics">
-<span id="id3"></span><h3><span class="section-number">1.2.2. </span>Accuracy Metrics<a class="headerlink" href="#accuracy-metrics" title="Permalink to this heading">#</a></h3>
+<span id="id4"></span><h3><span class="section-number">1.2.2. </span>Accuracy Metrics<a class="headerlink" href="#accuracy-metrics" title="Permalink to this heading">#</a></h3>
 <p>I primarily explore 2 methods of quantifying accuracy:</p>
 <ol class="arabic simple">
 <li><p>Normalized Estimated Error Squared (NEES).</p></li>
@@ -527,9 +528,14 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 </section>
 </section>
 </section>
+<section id="conclusion">
+<h2><span class="section-number">1.3. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>I have implemented the univariate and multivariate Kalman Filter, implemented 2 methods to evaluate its accuracy, and conducted a number of numerical explorations including applying the filter to perform regression on global temperature data and evaluating the accuracy of the multivariate filter’s estimates on a synthetic data set in response to perturbing filter parameters.</p>
+<p>The lower-level details of my explorations, including a number of explorations I did not feel warranted inclusion in the write up, may be found in the <a class="reference internal" href="#code"><span class="std std-ref">Code section</span></a> below and in the <a class="reference internal" href="code_appendix.html#secondary-code-appendix"><span class="std std-ref">Secondary Code Appendix</span></a>.</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="code">
-<h1><span class="section-number">2. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h1>
+<span id="id5"></span><h1><span class="section-number">2. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h1>
 <p>Below are the details of my analysis, including code implementation and low-level explanations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -569,10 +575,10 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 </div>
 </div>
 </section>
-<section id="id4">
-<h2><span class="section-number">2.2. </span>The 1D Kalman Filter<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h2><span class="section-number">2.2. </span>The 1D Kalman Filter<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <section id="d-kalman-implementation">
-<span id="id5"></span><h3><span class="section-number">2.2.1. </span>Implementation<a class="headerlink" href="#d-kalman-implementation" title="Permalink to this heading">#</a></h3>
+<span id="id7"></span><h3><span class="section-number">2.2.1. </span>Implementation<a class="headerlink" href="#d-kalman-implementation" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the kalman filter algorithm on a series of observations and return</span>
@@ -655,7 +661,7 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 </div>
 </section>
 <section id="exploring-how-the-kalman-filter-behaves-with-data-gaps">
-<span id="id6"></span><h3><span class="section-number">2.2.2. </span>Exploring how the kalman filter behaves with data gaps<a class="headerlink" href="#exploring-how-the-kalman-filter-behaves-with-data-gaps" title="Permalink to this heading">#</a></h3>
+<span id="id8"></span><h3><span class="section-number">2.2.2. </span>Exploring how the kalman filter behaves with data gaps<a class="headerlink" href="#exploring-how-the-kalman-filter-behaves-with-data-gaps" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="c1"># Measurement variance</span>
@@ -731,7 +737,7 @@ rapidly reduces in magnitude. <a class="reference internal" href="#mv-kf-pva-var
 </section>
 <section id="the-bayesian-intuition-underlying-the-kalman-filter">
 <h2><span class="section-number">2.3. </span>The Bayesian Intuition underlying the Kalman Filter<a class="headerlink" href="#the-bayesian-intuition-underlying-the-kalman-filter" title="Permalink to this heading">#</a></h2>
-<p>In his excellent exploration of the Kalman Filter <span id="id7">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span>, Roger Labbe illustrates the Bayesian intuition underlying the Kalman filter algorithm. I have implemented the Bayesian approach <a class="reference internal" href="code_appendix.html#bayesian-1d-kalman"><span class="std std-numref">Section 4.3</span></a>, and show it has the same result as the traditional implementation.</p>
+<p>In his excellent exploration of the Kalman Filter <span id="id9">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span>, Roger Labbe illustrates the Bayesian intuition underlying the Kalman filter algorithm. I have implemented the Bayesian approach <a class="reference internal" href="code_appendix.html#bayesian-1d-kalman"><span class="std std-numref">Section 4.3</span></a>, and show it has the same result as the traditional implementation.</p>
 </section>
 <section id="multidimensional-kalman-filter-for-a-process-with-constant-acceleration">
 <h2><span class="section-number">2.4. </span>Multidimensional Kalman Filter (for a Process With Constant Acceleration)<a class="headerlink" href="#multidimensional-kalman-filter-for-a-process-with-constant-acceleration" title="Permalink to this heading">#</a></h2>
@@ -886,7 +892,7 @@ F \vec{x}(k-1)
 <section id="synthesizing-measurements">
 <h3><span class="section-number">2.4.2. </span>Synthesizing measurements<a class="headerlink" href="#synthesizing-measurements" title="Permalink to this heading">#</a></h3>
 <p>To synthesize our measurement series <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span>, we add bivariate white noise <span class="math notranslate nohighlight">\(\vec{\xi}(k) \sim \mathcal{N}(0,R)\)</span> to our synthesized true state series <span class="math notranslate nohighlight">\(\vec{x}(k)\)</span>.</p>
-<p>We will assume we only have positional sensors to take measurements, i.e. <span class="math notranslate nohighlight">\(\vec{z}(k) = [z_x(k), z_y(k)]^T\)</span>. As there are no velocity or acceleration components to our measurements, <span class="math notranslate nohighlight">\(\dot{x}\)</span>, <span class="math notranslate nohighlight">\(\ddot{x}\)</span>, <span class="math notranslate nohighlight">\(\dot{y}\)</span>, and <span class="math notranslate nohighlight">\(\ddot{y}\)</span> are all <em>hidden variables</em> (<span id="id8">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span> Chpt. 5).</p>
+<p>We will assume we only have positional sensors to take measurements, i.e. <span class="math notranslate nohighlight">\(\vec{z}(k) = [z_x(k), z_y(k)]^T\)</span>. As there are no velocity or acceleration components to our measurements, <span class="math notranslate nohighlight">\(\dot{x}\)</span>, <span class="math notranslate nohighlight">\(\ddot{x}\)</span>, <span class="math notranslate nohighlight">\(\dot{y}\)</span>, and <span class="math notranslate nohighlight">\(\ddot{y}\)</span> are all <em>hidden variables</em> (<span id="id10">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span> Chpt. 5).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Synthesize measurements by adding random noise to the true position series</span>
@@ -920,7 +926,7 @@ F \vec{x}(k-1)
 <section id="multidimensional-filter-implementation">
 <span id="multivar-kf-implementation"></span><h3><span class="section-number">2.4.3. </span>Multidimensional Filter Implementation<a class="headerlink" href="#multidimensional-filter-implementation" title="Permalink to this heading">#</a></h3>
 <p>Now that we have our synthetic observations <span class="math notranslate nohighlight">\(\vec{z}(k)\)</span> we can apply a multivariate Kalman filter to obtain estimates <span class="math notranslate nohighlight">\(\hat{x}(k)\)</span> and do some analysis.</p>
-<p>First we must implement that filter. The implementation below draws heavily from <span id="id9">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span> Chpt. 6, extending that implementation to track 6 state variables instead of 2.</p>
+<p>First we must implement that filter. The implementation below draws heavily from <span id="id11">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span> Chpt. 6, extending that implementation to track 6 state variables instead of 2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matrix H converts state vectors into measurement space</span>
@@ -1138,7 +1144,7 @@ in the <span class="math notranslate nohighlight">\(x\)</span>-dimension for fir
 <li><p>Show that this multidimensional filter implementation has a “good” average NEES score on my synthetic data (where “good” means the average NEES score is less than the dimension of the state vectors).</p></li>
 <li><p>Numerically show that <span class="math notranslate nohighlight">\(\epsilon(k)\)</span> is chi-squared distributed with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom as is theoretically expected.</p></li>
 </ol>
-<p>References: <span id="id10">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span>, <span id="id11">[<a class="reference internal" href="bibliography.html#id7" title="Yaakov Bar-Shalom, X Rong Li, and Thiagalingam Kirubarajan. Estimation with applications to tracking and navigation: theory algorithms and software. John Wiley &amp; Sons, 2001.">BSLK01</a>]</span></p>
+<p>References: <span id="id12">[<a class="reference internal" href="bibliography.html#id4" title="Roger Labbe. Kalman and bayesian filters in python. https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python. Accessed: 2023-08-10.">Lab</a>]</span>, <span id="id13">[<a class="reference internal" href="bibliography.html#id7" title="Yaakov Bar-Shalom, X Rong Li, and Thiagalingam Kirubarajan. Estimation with applications to tracking and navigation: theory algorithms and software. John Wiley &amp; Sons, 2001.">BSLK01</a>]</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs_pos</span><span class="p">,</span> <span class="n">xs_vel</span><span class="p">,</span> <span class="n">xs_acc</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">separate_state_series</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
@@ -1682,11 +1688,12 @@ Q:
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.3. Conclusion</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code">2. Code</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#global-temp-anomaly-data">2.1. Global Temp Anomaly Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2. The 1D Kalman Filter</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2. The 1D Kalman Filter</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-kalman-implementation">2.2.1. Implementation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-how-the-kalman-filter-behaves-with-data-gaps">2.2.2. Exploring how the kalman filter behaves with data gaps</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-the-parameter-space-of-q-x-r">2.2.3. Exploring the parameter space of <span class="math notranslate nohighlight">\(Q\)</span> x <span class="math notranslate nohighlight">\(R\)</span></a></li>
@@ -1735,7 +1742,7 @@ By David Ouyang Moench
     
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
